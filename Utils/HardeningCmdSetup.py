@@ -20,15 +20,11 @@ class HardeningCmdSetup():
         hardening_regression_cmd_data = json_data_regression['hardening']
         # Extract runci py file path
         runci_pyfile = hardening_regression_cmd_data['runci_pyfile']
-        # Extract config file directory 
-        hardening_config_file = os.path.join(hardening_regression_cmd_data['config_file_directory'], self.config_file)
-        # Extract testlist py file directory
-        testlist_pyfile = os.path.join(hardening_regression_cmd_data['testlist_pyfile_directory'], self.testlist_output_file)
         # Set for platform amount to be used in this regression max to 8
         platform_amount = testcase_amount if testcase_amount <= 8 else 8
         # Extract excluded platform
         platform_exclude = hardening_regression_cmd_data['platform_exclude']
-        hardening_cmd = f"python3.11.1 {runci_pyfile} -m hardening -c {hardening_config_file} -t {testlist_pyfile} -n{platform_amount} --exclude {' '.join(platform_exclude)}"
+        hardening_cmd = f"python3.11.1 {runci_pyfile} -m hardening -c {self.config_file} -t {self.testlist_output_file} -n{platform_amount} --exclude {' '.join(platform_exclude)}"
 
         print(f"Hardening Regression CMD Log [CMD]: {hardening_cmd}")
         print("Hardening Regression CMD Log [PASS]: Hardening Regression Command successfully constructed")

@@ -35,9 +35,9 @@ class ExcelTestcaseRetrival:
         print("Excel Log [PASS]: Testcase successfully extracted from excel sheet")
         #Refresh the checbox to false and release the excel
         #Comment now as i dont wanna release and reset again, the function is ald proven functioning
-        # print("Excel Log [info]: Refreshing checkbox in excel sheet")
-        # self.testlist_excel_release()
-        # print("Excel Log [PASS]: Checbox successfully unchecked in excel sheet")
+        print("Excel Log [info]: Refreshing checkbox in excel sheet")
+        self.testlist_excel_release()
+        print("Excel Log [PASS]: Checbox successfully unchecked in excel sheet")
         return testcase_execute_list
 
 # if __name__ == "__main__":

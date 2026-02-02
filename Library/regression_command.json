@@ -1,8 +1,6 @@
 {
     "hardening":{
                 "runci_pyfile" : "/p/ipval/farm/vice/tools/falcon/prod/runci.py",
-                "config_file_directory" : "/nfs/png/disks/png_viceipr_disk001/FalconRun/users/QUAL/Hardening_EXP",
-                "testlist_pyfile_directory" : "/nfs/png/disks/png_viceipr_disk001/FalconRun/users/QUAL/Hardening_EXP",
                 "platform_exclude" : ["pngfpga607", "pngfpga608", "pngfpga664", "pngfpga668", "pngfpga623", "kmfpga611"]
                 }
 }
