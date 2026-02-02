@@ -68,7 +68,7 @@ if __name__ == "__main__":
 
     #Extract the Runid and rename the output folder to Runid
     hardening_runid = runid_extraction(output_regression_log_file)
-    os.rename(temporary_output_folder_path, hardening_runid)
     final_output_folder_path = os.path.join(os.path.dirname(temporary_output_folder_path), hardening_runid)
+    os.rename(temporary_output_folder_path, final_output_folder_path)
     print(f"Main [info]: Overall results are saved in {final_output_folder_path}")
 
