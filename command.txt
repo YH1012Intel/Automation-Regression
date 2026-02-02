@@ -1,0 +1,7 @@
+
+
+# Write mode 
+python3.11.1 /nfs/png/disks/png_viceipr_disk001/FalconRun/users/QUAL/Hardening_test/Automation-Regression/Utils/TestlineCSVconverter_V1.py -o /nfs/png/disks/png_viceipr_disk001/FalconRun/users/QUAL/Hardening_test/Automation-Regression/ace_testlist_ttlhg4_v1.xlsx -t /nfs/png/disks/png_viceipr_disk001/FalconRun/users/QUAL/Hardening_test/Automation-Regression/Hardening_Testlist_Directory/ace_testlist_ttlhg4.py -f /nfs/png/disks/png_viceipr_disk001/FalconRun/users/QUAL/Hardening_test/Automation-Regression/Library/featurewithtestcase_perspec_maestro.xlsx -m write
+
+# Append mode
+python3.11.1 /nfs/png/disks/png_viceipr_disk001/FalconRun/users/QUAL/Hardening_test/Automation-Regression/Utils/TestlineCSVconverter_V1.py -o /nfs/png/disks/png_viceipr_disk001/FalconRun/users/QUAL/Hardening_test/Automation-Regression/ace_testlist_ttlhg4_v1.xlsx -t /nfs/png/disks/png_viceipr_disk001/FalconRun/users/QUAL/Hardening_test/Automation-Regression/Hardening_Testlist_Directory/ace_pytest_qual_testlist_ttlhg4.py -f /nfs/png/disks/png_viceipr_disk001/FalconRun/users/QUAL/Hardening_test/Automation-Regression/Library/featurewithtestcase_pytest.xlsx -m append

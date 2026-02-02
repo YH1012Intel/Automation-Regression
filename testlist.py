@@ -1,0 +1,22 @@
+from init import *
+maestro_tags = 'ttlhg4.fpga.logall'
+PROJ_DEFS = proj_init.generate_fields(maestro_tags)
+perspec_files = [PROJ_DEFS['_PRELOAD'], PROJ_DEFS['_PRELOAD_GNA'] , '/perspec/models/ace/standalone/ace.psf'  , '/perspec/models/gna/gna_inACE_pkg.psf' , '/perspec/scripts/utils/perspec_parameter_constraint_output.sln', '/perspec/scripts/utils/perspec_scenario_execution_sequence.sln']
+perspec_args = PROJ_DEFS['_DEF']
+
+plat_uaol = '/nfs/png/disks/png_coesv_disk001/users/mohdjail/Platform_bling/nvlh/PGVICEWINCI605_nvlh_24ww01/Platform.bl'
+plat_uaol_csv = '/nfs/png/disks/png_coesv_disk001/users/mohdjail/Platform_bling/nvlh/PGVICEWINCI605_nvlh_24ww01/Platform.csv'
+perspec_args_uaol = r' -define PORT_TABLE_NAME \"UsbTestcard\"' + r' -define CONFIG_FILE=\"/nfs/png/disks/png_coesv_disk001/users/mohdjail/Platform_bling/nvlh/PGVICEWINCI605_nvlh_24ww01/Platform.csv\"' + r' -define PORT_CONFIG_FILE=\"/nfs/png/disks/png_coesv_disk001/users/mohdjail/Platform_bling/nvlh/PGVICEWINCI605_nvlh_24ww01/Platform.csv\"'
+perspec_files_uaol = [PROJ_DEFS['_PRELOAD'], '/perspec/models/uaol/standalone/uaol.psf', '/perspec/scripts/utils/perspec_parameter_constraint_output.sln', '/perspec/scripts/utils/perspec_scenario_execution_sequence.sln']
+perspec_args_uaol_conc = r' -max_actions 50 -max_requested_actions 50 -solver_timeout 1000 -define PORT_TABLE_NAME \"UsbTestcard\"' + r' -define CONFIG_FILE=\"/nfs/png/disks/png_coesv_disk001/users/mohdjail/Platform_bling/nvlh/PGVICEWINCI605_nvlh_24ww01/Platform.csv\"' + r' -define PORT_CONFIG_FILE=\"/nfs/png/disks/png_coesv_disk001/users/mohdjail/Platform_bling/nvlh/PGVICEWINCI605_nvlh_24ww01/Platform.csv\"'
+plat = '/nfs/png/disks/png_coesv_disk001/Platform_Bling/PGVICEWINCIcommon.bl'
+
+dmic_rand_ldma_0 = {'job': 'dmic_rand_ldma_0', 'type': 'perspec_maestro', 'feature_list' :['dmic'], 'args': [{'content_location': r'/perspec/targets/ipsv/ace/fpga/dmic/dmic_rand_ldma.sln', 'maestro_tags': maestro_tags, 'perspec_files': perspec_files, 'perspec_args': perspec_args, 'perspec_seed': 71619, 'perspec_seed_count': 1, 'maestro_seed_count': 50}]}
+timestamping_conc_uaol_dmic_host_hhtse = {'job': 'timestamping_conc_uaol_dmic_host_hhtse', 'type': 'perspec_maestro', 'feature_list' :['tts'], 'args': [{'content_location': r'/perspec/targets/ipsv/ace/fpga/timestamp/timestamping_conc_uaol_dmic_host_hhtse.sln', 'maestro_tags': maestro_tags, 'perspec_files': perspec_files_uaol, 'perspec_args': perspec_args_uaol_conc, 'perspec_seed': 47691, 'perspec_seed_count': 1, 'maestro_seed_count': 50, 'plat': plat_uaol, 'plat_csv': plat_uaol_csv}]}
+timestamping_uaol_in_dsp_odts = {'job': 'timestamping_uaol_in_dsp_odts', 'type': 'perspec_maestro', 'feature_list' :['tts'], 'args': [{'content_location': r'/perspec/targets/ipsv/ace/fpga/timestamp/timestamping_uaol_in_dsp_odts.sln', 'maestro_tags': maestro_tags, 'perspec_files': perspec_files_uaol, 'perspec_args': perspec_args_uaol, 'perspec_seed': 37165, 'perspec_seed_count': 1, 'maestro_seed_count': 50, 'plat': plat_uaol, 'plat_csv': plat_uaol_csv}]}
+Affine_single_hpsram_0 = {'job': 'Affine_single_hpsram_0', 'type': 'perspec_maestro', 'feature_list' :['anna'], 'args': [{'content_location': r'/perspec/targets/ipsv/gna/fpga/emb/gna4p5/HPSRAM/Affine/Affine_single.sln', 'maestro_tags': maestro_tags, 'perspec_files': perspec_files, 'perspec_args': perspec_args, 'perspec_seed': 29406, 'perspec_seed_count': 1, 'maestro_seed_count': 50, 'plat': plat}]}
+Affine_Mb_single_hpsram = {'job': 'Affine_Mb_single_hpsram', 'type': 'perspec_maestro', 'feature_list' :['anna'], 'args': [{'content_location': r'/perspec/targets/ipsv/gna/fpga/emb/gna4p5/HPSRAM/Affine_Mb/Affine_Mb_single.sln', 'maestro_tags': maestro_tags, 'perspec_files': perspec_files, 'perspec_args': perspec_args, 'perspec_seed': 30339, 'perspec_seed_count': 1, 'maestro_seed_count': 50, 'plat': plat}]}
+Copy_single_hpsram = {'job': 'Copy_single_hpsram', 'type': 'perspec_maestro', 'feature_list' :['anna'], 'args': [{'content_location': r'/perspec/targets/ipsv/gna/fpga/emb/gna4p5/HPSRAM/Copy/Copy_single.sln', 'maestro_tags': maestro_tags, 'perspec_files': perspec_files, 'perspec_args': perspec_args, 'perspec_seed': 69999, 'perspec_seed_count': 1, 'maestro_seed_count': 50, 'plat': plat}]}
+
+
+TESTLINES_TO_BE_EXECUTE = [dmic_rand_ldma_0, timestamping_conc_uaol_dmic_host_hhtse, timestamping_uaol_in_dsp_odts, Affine_single_hpsram_0, Affine_Mb_single_hpsram, Copy_single_hpsram, ]
