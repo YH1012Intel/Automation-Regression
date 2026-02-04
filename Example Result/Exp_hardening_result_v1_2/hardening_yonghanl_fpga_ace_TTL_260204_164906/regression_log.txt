@@ -1,0 +1,78 @@
+STDOUT:
+Python Version: 3.11.1 (main, Dec  6 2023, 09:00:14) [GCC 12.2.0]
+Python Version Info: sys.version_info(major=3, minor=11, micro=1, releaselevel='final', serial=0)
+Python path: ['/nfs/png/disks/png_fpga_00006/farm/vice/tools/falcon/archive/PROD.2026ww03', '/nfs/png/disks/png_fpga_00006/farm/vice/tools/falcon/archive/PROD.2026ww03/vice/falcon/automation/trigger', '/usr/intel/pkgs/python3/3.11.1/lib/python311.zip', '/usr/intel/pkgs/python3/3.11.1/lib/python3.11', '/usr/intel/pkgs/python3/3.11.1/lib/python3.11/lib-dynload', '/nfs/site/home/yonghanl/.local/lib/python3.11/site-packages', '/usr/intel/pkgs/python3/3.11.1/lib/python3.11/site-packages', '/nfs/png/disks/png_fpga_00006/farm/vice/tools/falcon/archive/PROD.2026ww03/pysite-packages/falcon/bin', '/nfs/png/disks/png_fpga_00006/farm/vice/tools/falcon/archive/PROD.2026ww03/pysite-packages/falcon/lib/python3.11/site-packages']
+[2026/02/04 16:49:06(+0800)] [      INFO] - 
+
+Execute Falcon CI automation
+
+IP                     : ace
+Project                : TTL
+Validation environment : fpga
+Validation framework   : perspec_maestro
+Triggered command line : /nfs/png/disks/png_fpga_00006/farm/vice/tools/falcon/archive/PROD.2026ww03/vice/falcon/automation/trigger/runci.py -m hardening -c /nfs/png/disks/png_viceipr_disk001/FalconRun/users/QUAL/Hardening_test/Hardening/hardening_26WW6_3_164900_perspec_maestro_ADSP/ace_config_qual_ttlhg4.py -t /nfs/png/disks/png_viceipr_disk001/FalconRun/users/QUAL/Hardening_test/Hardening/hardening_26WW6_3_164900_perspec_maestro_ADSP/testlist.py -n1 --exclude pngfpga607 pngfpga608 pngfpga664 pngfpga668 pngfpga623 kmfpga611
+
+[2026/02/04 16:49:06(+0800)] [      INFO] - 
+[2026/02/04 16:49:06(+0800)] [   WARNING] - Configure environment variable 'MAESTRO_FRAMEWORK' with value 'UNIFIED'
+[2026/02/04 16:49:06(+0800)] [   WARNING] - Configure environment variable 'DISCOVERY_SAFELIST_ACE' with value '1'
+[2026/02/04 16:49:06(+0800)] [   WARNING] - Configure environment variable 'DISCOVERY_SAFELIST_SONORA' with value '1'
+[2026/02/04 16:49:06(+0800)] [   WARNING] - Configure environment variable 'ACEFW' with value 'DEBUG'
+[2026/02/04 16:49:07(+0800)] [      INFO] - Available phases for 'fpga' and 'perspec_maestro': ['acquire_ingredients', 'system_provisioning', 'system_discovery', 'testline_execution', 'testline_postprocess', 'testline_recovery', 'maestro_workflow_seed_recovery']
+[2026/02/04 16:49:07(+0800)] [      INFO] - Verify building block named 'COVERAGE_GITHUB_SETUP'
+[2026/02/04 16:49:07(+0800)] [      INFO] - Verify building block named 'MAESTRO_GITHUB_SETUP'
+[2026/02/04 16:49:07(+0800)] [      INFO] - Verify building block named 'USB_REDIRECTOR_SHARE_DEVICES'
+[2026/02/04 16:49:07(+0800)] [      INFO] - Verify building block named 'HAPS_PROGRAMMING'
+[2026/02/04 16:49:07(+0800)] [      INFO] - Verify building block named 'POWER_SPLITTER_PORT_POWER_CYCLE'
+[2026/02/04 16:49:07(+0800)] [      INFO] - Verify building block named 'BLOCKING_SUT_UNTIL_BOOT_INTO_F6'
+[2026/02/04 16:49:07(+0800)] [      INFO] - Verify building block named 'GENERATE_PLATFORM_CONFIG_XML'
+[2026/02/04 16:49:07(+0800)] [      INFO] - Verify building block named 'VERIFY_PLATFORM_CONFIG_XML'
+[2026/02/04 16:49:07(+0800)] [      INFO] - Verify building block named 'MAESTRO_SYSTEM_DISCOVERY'
+[2026/02/04 16:49:07(+0800)] [      INFO] - Verify building block named 'POWER_SPLITTER_PORT_POWER_CYCLE'
+[2026/02/04 16:49:07(+0800)] [      INFO] - Verify building block named 'BLOCKING_SUT_UNTIL_BOOT_INTO_F6'
+[2026/02/04 16:49:07(+0800)] [      INFO] - Verify building block named 'PERSPEC_CONTENT_GENERATION'
+[2026/02/04 16:49:07(+0800)] [      INFO] - Verify building block named 'MAESTRO_WORKFLOW'
+[2026/02/04 16:49:07(+0800)] [      INFO] - Verify building block named 'POWER_SPLITTER_PORT_POWER_CYCLE'
+[2026/02/04 16:49:07(+0800)] [      INFO] - Verify building block named 'BLOCKING_SUT_UNTIL_BOOT_INTO_F6'
+[2026/02/04 16:49:07(+0800)] [      INFO] - Verify building block named 'POWER_SPLITTER_PORT_POWER_CYCLE'
+[2026/02/04 16:49:07(+0800)] [      INFO] - Verify building block named 'BLOCKING_SUT_UNTIL_BOOT_INTO_F6'
+[2026/02/04 16:49:07(+0800)] [      INFO] - Setting skip gmake parallel flag to True
+[2026/02/04 16:49:07(+0800)] [      INFO] - 
+[2026/02/04 16:49:07(+0800)] [      INFO] - Run ID  : hardening_yonghanl_fpga_ace_TTL_260204_164906
+[2026/02/04 16:49:07(+0800)] [      INFO] - Directory (Linux)   : /nfs/png/disks/png_viceipr_disk001/falcon_logs/non-qual/fpga/hardening_yonghanl_fpga_ace_TTL_260204_164906
+[2026/02/04 16:49:07(+0800)] [      INFO] - Directory (Windows) : \\samba.png.intel.com\nfs\png\disks\png_viceipr_disk001\falcon_logs\non-qual\fpga\hardening_yonghanl_fpga_ace_TTL_260204_164906
+[2026/02/04 16:49:07(+0800)] [      INFO] - Execute OS command: /nfs/site/itools/em64t_SLES15/pkgs/wrapper/2.15/bin/nbadmin feeder status --target pglnbf02.png.intel.com:44697
+[2026/02/04 16:49:08(+0800)] [      INFO] - Number of parallel systems selected: 1
+[2026/02/04 16:49:08(+0800)] [      INFO] - 
+[2026/02/04 16:49:08(+0800)] [      INFO] - Number of jobs given     : 1
+[2026/02/04 16:49:08(+0800)] [      INFO] - Number of jobs get spawn : 1
+[2026/02/04 16:49:08(+0800)] [      INFO] - 
+[2026/02/04 16:49:08(+0800)] [      INFO] - Default groups: intelall,soc,ipval,hfpga_farm,falconadm,vice_hvp_group
+[2026/02/04 16:49:08(+0800)] [      INFO] - []
+[2026/02/04 16:49:08(+0800)] [      INFO] - Final group list with user input groups: intelall,soc,ipval,hfpga_farm,falconadm,vice_hvp_group
+[2026/02/04 16:49:08(+0800)] [      INFO] - Execute OS command: sudo su - sys_viceci -c "/usr/intel/bin/nbtask load --target pglnbf02.png.intel.com:44697 /nfs/png/disks/png_viceipr_disk001/falcon_logs/non-qual/fpga/hardening_yonghanl_fpga_ace_TTL_260204_164906/netbatch/nbtask.cfg"
+[2026/02/04 16:49:09(+0800)] [      INFO] - Task file loaded successfully.
+Your task has been queued (TaskID: 2073586, Name: hardening_yonghanl_fpga_ace_TTL_260204_164906)
+Your task has been queued (TaskID: 2073587, Name: AcquireIngredients)
+Your task has been queued (TaskID: 2073588, Name: Progress_Email)
+Your task has been queued (TaskID: 2073589, Name: Falcon_TestCase)
+Your task has been queued (TaskID: 2073590, Name: Task_Runner_dspmem_50_1_1)
+Your task has been queued (TaskID: 2073591, Name: Setup_Task_Runner_dspmem_50_1_1)
+Your task has been queued (TaskID: 2073592, Name: Testline_Runner_dspmem_50_1_1)
+Your task has been queued (TaskID: 2073593, Name: Finalize_of_Task_Runner_dspmem_50_1_1)
+Your task has been queued (TaskID: 2073594, Name: Finalize_of_hardening_yonghanl_fpga_ace_TTL_260204_164906)
+[2026/02/04 16:49:11(+0800)] [      INFO] - 
+==Ingredient List==
+fpga_image_1 : /nfs/png/disks/png_coesv_disk001/fpga_images/ACE/TTL_ttl-ace-ipfpga-cth-2026-01-21-ace4px-drop-3_HAPS_80_build0_upf_Vivado_par_directive_v6.2021.2/project.conf
+devices : ['0x0BCD']
+
+[2026/02/04 16:49:11(+0800)] [   WARNING] - [31mIP_DISKSPACE is not set in config.py.
+Please take note that ALL IPs will need to setup your own IP_DISKSPACE for log storage and will be a mandatory field starting Q2'2026.
+If further assistance is needed, please feel free to contact any CI Developers.[0m
+[2026/02/04 16:49:11(+0800)] [      INFO] - runci exitcode: 0
+
+
+STDERR:
+
+
+RETURNCODE:
+0

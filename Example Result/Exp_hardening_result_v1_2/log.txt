@@ -1,0 +1,63 @@
+pglc00538> python3.11.1 main_pytest_method.py
+Excel Log                      [info]: Extracting testcase from excel sheet
+Excel Log                      [PASS]: Testcase successfully extracted from excel sheet
+Output Directory Folder Log    [info]: Constructing Temporary Output Folder Directory
+Output Directory Folder Log    [info]: Adding external files for perspec maestro
+Output Directory Folder Log    [info]: /nfs/png/disks/png_viceipr_disk001/FalconRun/users/QUAL/Hardening_test/Hardening/hardening_26WW6_3_164900_perspec_maestro_ADSP
+Output Directory Folder Log    [PASS]: Temporary Output Folder Directory Completed Successfully
+Output Directory Folder Log    [info]: Constructing Temporary Output Folder Directory
+Output Directory Folder Log    [info]: Adding external files for perspec maestro
+Output Directory Folder Log    [info]: /nfs/png/disks/png_viceipr_disk001/FalconRun/users/QUAL/Hardening_test/Hardening/hardening_26WW6_3_164900_pytest_Register
+Output Directory Folder Log    [PASS]: Temporary Output Folder Directory Completed Successfully
++------------------------------------------------------------+
+| Validation Framework: perspec_maestro                      |
+| Feature Testcase    : ADSP                                 |
+| Starting time       : Wed Feb 4 16:49:00 2026              |
+| Testcase            : dspmem_50_1                          |
++------------------------------------------------------------+
+Testlist Construction          [info]: Testlist Directory   : /nfs/png/disks/png_viceipr_disk001/FalconRun/users/QUAL/Hardening_test/Hardening/hardening_26WW6_3_164900_perspec_maestro_ADSP/testlist.py
+Testlist Construction          [info]: Constructing Testline commands
+Testlist Construction          [PASS]: Testline commands sucessfully constructed
+Testlist Construction          [info]: Extracting Presetup Argument
+Testlist Construction          [PASS]: Presetup Argument successfully extracted
+Testlist Construction          [info]: Constructing Testlist Python file
+Testlist Construction          [PASS]: Testlist Python file successfully constructed
+Hardening Regression CMD Log   [info]: Constructing Hardening Regression Command
+Hardening Regression CMD Log    [CMD]: python3.11.1 /p/ipval/farm/vice/tools/falcon/prod/runci.py -m hardening -c /nfs/png/disks/png_viceipr_disk001/FalconRun/users/QUAL/Hardening_test/Hardening/hardening_26WW6_3_164900_perspec_maestro_ADSP/ace_config_qual_ttlhg4.py -t /nfs/png/disks/png_viceipr_disk001/FalconRun/users/QUAL/Hardening_test/Hardening/hardening_26WW6_3_164900_perspec_maestro_ADSP/testlist.py -n1 --exclude pngfpga607 pngfpga608 pngfpga664 pngfpga668 pngfpga623 kmfpga611
+Hardening Regression CMD Log   [PASS]: Hardening Regression Command successfully constructed
+Regression Log                 [info]: Time sleep 5 for background maestro execution
+Regression Log                 [info]: Time sleep complete for background maestro execution
+Regression Log                 [info]: Executing Hardening Regression command
+Regression Log                 [PASS]: Hardening Regression command successfully executed
+Regression Log                 [info]: Regression log saved to regression_log.txt
+Main                           [info]: RUN ID: hardening_yonghanl_fpga_ace_TTL_260204_164906
+Main                           [info]: Regression log results are saved in /nfs/png/disks/png_viceipr_disk001/FalconRun/users/QUAL/Hardening_test/Hardening/hardening_yonghanl_fpga_ace_TTL_260204_164906
++######################################################################+
+                                 PASS                                 
++######################################################################+
++------------------------------------------------------------+
+| Validation Framework: pytest                               |
+| Feature Testcase    : Register                             |
+| Starting time       : Wed Feb 4 16:49:11 2026              |
+| Testcase            : test_register_SAI_THSTSAI_hmmr_0     |
++------------------------------------------------------------+
+Testlist Construction          [info]: Testlist Directory   : /nfs/png/disks/png_viceipr_disk001/FalconRun/users/QUAL/Hardening_test/Hardening/hardening_26WW6_3_164900_pytest_Register/testlist.py
+Testlist Construction          [info]: Constructing Testline commands
+Testlist Construction          [PASS]: Testline commands sucessfully constructed
+Testlist Construction          [info]: Extracting Presetup Argument
+Testlist Construction          [PASS]: Presetup Argument successfully extracted
+Testlist Construction          [info]: Constructing Testlist Python file
+Testlist Construction          [PASS]: Testlist Python file successfully constructed
+Hardening Regression CMD Log   [info]: Constructing Hardening Regression Command
+Hardening Regression CMD Log    [CMD]: python3.11.1 /p/ipval/farm/vice/tools/falcon/prod/runci.py -m hardening -c /nfs/png/disks/png_viceipr_disk001/FalconRun/users/QUAL/Hardening_test/Hardening/hardening_26WW6_3_164900_pytest_Register/ace_pytest_qual_config_ttlhg4.py -t /nfs/png/disks/png_viceipr_disk001/FalconRun/users/QUAL/Hardening_test/Hardening/hardening_26WW6_3_164900_pytest_Register/testlist.py -n1 --exclude pngfpga607 pngfpga608 pngfpga664 pngfpga668 pngfpga623 kmfpga611
+Hardening Regression CMD Log   [PASS]: Hardening Regression Command successfully constructed
+Regression Log                 [info]: Time sleep 5 for background maestro execution
+Regression Log                 [info]: Time sleep complete for background maestro execution
+Regression Log                 [info]: Executing Hardening Regression command
+Regression Log                 [PASS]: Hardening Regression command successfully executed
+Regression Log                 [info]: Regression log saved to regression_log.txt
+Main                           [info]: RUN ID: hardening_yonghanl_fpga_ace_TTL_260204_164917
+Main                           [info]: Regression log results are saved in /nfs/png/disks/png_viceipr_disk001/FalconRun/users/QUAL/Hardening_test/Hardening/hardening_yonghanl_fpga_ace_TTL_260204_164917
++######################################################################+
+                                 PASS                                 
++######################################################################+

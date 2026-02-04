@@ -5,11 +5,15 @@ class RegressionCommandExecution:
     def __init__(self):
         pass
 
+    def format_status_line(self, label, status):
+        padding = max(40 - len(f"{label} [{status}]: "), 0)
+        return f"{label}{' ' * padding}[{status}]"
+
     def main(self, cmd, output_regression_log_file):
-        print("Regression Log [info]: Time sleep 5 for background maestro execution")
+        print(f"{self.format_status_line('Regression Log', 'info')}: Time sleep 5 for background maestro execution")
         time.sleep(5)
-        print("Regression Log [info]: Time sleep complete for background maestro execution")
-        print("Regression Log [info]: Executing Hardening Regression command")
+        print(f"{self.format_status_line('Regression Log', 'info')}: Time sleep complete for background maestro execution")
+        print(f"{self.format_status_line('Regression Log', 'info')}: Executing Hardening Regression command")
         process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
 
         try:
@@ -18,13 +22,13 @@ class RegressionCommandExecution:
             process.kill()
             stdout, stderr = process.communicate()
             print("Regression Log [timeout error]: Process timeout and was killed!")
-            print(f"Regression Log [info]: Regression log saved to regression_log.txt")
+            print(f"{self.format_status_line('Regression Log', 'info')}: Regression log saved to regression_log.txt")
         if process.returncode == 0:
-            print("Regression Log [PASS]: Hardening Regression command successfully executed")
-            print(f"Regression Log [info]: Regression log saved to regression_log.txt")
+            print(f"{self.format_status_line('Regression Log', 'PASS')}: Hardening Regression command successfully executed")
+            print(f"{self.format_status_line('Regression Log', 'info')}: Regression log saved to regression_log.txt")
         else:
             print("Regression Log [ERROR]: Hardening Regression command failed!")
-            print(f"Regression Log [info]: Regression log saved to regression_log.txt")
+            print(f"{self.format_status_line('Regression Log', 'info')}: Regression log saved to regression_log.txt")
 
         with open(output_regression_log_file, 'w') as f:
             f.write("STDOUT:\n")

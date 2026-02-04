@@ -6,14 +6,20 @@ class ExcelTestcaseRetrival:
         self.testlist_excel = testlist_excel
         self.wb = openpyxl.load_workbook(self.testlist_excel)
         self.ws = self.wb.active
-        None
+    
+    def format_status_line(self, label, status):
+        padding = max(40 - len(f"{label} [{status}]: "), 0)
+        return f"{label}{' ' * padding}[{status}]"
     
     def testlist_excel_extract(self):
         testcase_execute_list=[]
         for row in self.ws.iter_rows(min_row=2, values_only=True):
             checkbox = row[0]  
             if checkbox is True:
-                data = [row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9]]
+                if row[1] == "perspec_maestro":
+                    data = [row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9]]
+                elif row[1] == "pytest":
+                    data = [row[1], row[2], row[3], row[10], row[11], row[12]]
                 testcase_execute_list.append(data)
         return testcase_execute_list
 
@@ -30,14 +36,14 @@ class ExcelTestcaseRetrival:
     
     def main(self):
         #Extract the testcase from excel which checkbox is set to TRUE
-        print("Excel Log [info]: Extracting testcase from excel sheet")
+        print(f"{self.format_status_line('Excel Log', 'info')}: Extracting testcase from excel sheet")
         testcase_execute_list = self.testlist_excel_extract()
-        print("Excel Log [PASS]: Testcase successfully extracted from excel sheet")
+        print(f"{self.format_status_line('Excel Log', 'PASS')}: Testcase successfully extracted from excel sheet")
         #Refresh the checbox to false and release the excel
         #Comment now as i dont wanna release and reset again, the function is ald proven functioning
-        print("Excel Log [info]: Refreshing checkbox in excel sheet")
-        self.testlist_excel_release()
-        print("Excel Log [PASS]: Checbox successfully unchecked in excel sheet")
+        # print("Excel Log [info]: Refreshing checkbox in excel sheet")
+        # self.testlist_excel_release()
+        # print("Excel Log [PASS]: Checbox successfully unchecked in excel sheet")
         return testcase_execute_list
 
 # if __name__ == "__main__":

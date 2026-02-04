@@ -4,14 +4,16 @@ import json
 import os
 
 class HardeningCmdSetup():
-    def __init__(self, testlist_output_file, regression_command_json, config_file):
-        self.testlist_output_file = testlist_output_file
-        self.regression_command_json = regression_command_json
-        self.config_file = config_file
+    def __init__(self, home_dir):
+        self.regression_command_json = os.path.join(home_dir, 'Library', 'regression_command.json') 
 
-    def main(self, testcase_amount):
+    def format_status_line(self, label, status):
+        padding = max(40 - len(f"{label} [{status}]: "), 0)
+        return f"{label}{' ' * padding}[{status}]"
 
-        print("Hardening Regression CMD Log [info]: Constructing Hardening Regression Command")
+    def main(self, testcase_amount, testlist_output_file, config_file):
+
+        print(f"{self.format_status_line('Hardening Regression CMD Log', 'info')}: Constructing Hardening Regression Command")
         # Read regresison cmd json file data
         with open(self.regression_command_json, 'r') as file:
             json_data_regression = json.load(file)
@@ -24,10 +26,10 @@ class HardeningCmdSetup():
         platform_amount = testcase_amount if testcase_amount <= 8 else 8
         # Extract excluded platform
         platform_exclude = hardening_regression_cmd_data['platform_exclude']
-        hardening_cmd = f"python3.11.1 {runci_pyfile} -m hardening -c {self.config_file} -t {self.testlist_output_file} -n{platform_amount} --exclude {' '.join(platform_exclude)}"
+        hardening_cmd = f"python3.11.1 {runci_pyfile} -m hardening -c {config_file} -t {testlist_output_file} -n{platform_amount} --exclude {' '.join(platform_exclude)}"
 
-        print(f"Hardening Regression CMD Log [CMD]: {hardening_cmd}")
-        print("Hardening Regression CMD Log [PASS]: Hardening Regression Command successfully constructed")
+        print(f"{self.format_status_line('Hardening Regression CMD Log', 'CMD')}: {hardening_cmd}")
+        print(f"{self.format_status_line('Hardening Regression CMD Log', 'PASS')}: Hardening Regression Command successfully constructed")
         return hardening_cmd.split(" ")
 
 
