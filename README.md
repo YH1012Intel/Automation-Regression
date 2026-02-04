@@ -14,7 +14,7 @@ In this new version, automation can now organize your test cases by both the val
 6. only regression trigger log result will be saved at /nfs/png/disks/png_viceipr_disk001/FalconRun/users/QUAL/Hardening_test/Hardening/{runid}
 
 ### !!!Precaution!!! 
-There are two main py file one is main.py another is main_yh.py, main.py will need user id for setting up env. 
+There are two main py file one is main.py another is main_yh.py, main.py will need user id and password (dunno whre can get) for setting up env. 
 Developer has disable the excel release function for now. (Excel tickbox will auto uncheck after trigger)
 
 ### VERSION TO BE RELEASE
