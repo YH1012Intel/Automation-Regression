@@ -2,31 +2,33 @@
 To automate the regression in mode of hardening, mock and qual to reduce human intervention
 
 ### RELEASED VERSION
-### Version 1.1
-Hardening Regression can now be trigger by automation with excel. Just select with checbox the testcase and trigger the main_excel_method.py. Testlist will automatically be generated based on excel datasheet. Trigger of hardening regression is fully automated. 
+### Version 1.2
+In this new version, automation can now organize your test cases by both the validation framework (Pytest and Perspec Maestro) and the feature they covered. Each regression runid is linked to just one framework and one feature, so it’s easier to keep track of what’s being tested. All test cases for Pytest and Perspec Maestro are now included. User can track test cases based on which framework and feature they belong to based on regression runid, making everything easier to manage.
 
 #### Steps to Trigger
 1. cd to /nfs/png/disks/png_viceipr_disk001/FalconRun/users/QUAL/Hardening_test/Automation-Regression
-2. run python3.11.1 main_excel_method.py
-3. only regression trigger log result will be saved at /nfs/png/disks/png_viceipr_disk001/FalconRun/users/QUAL/Hardening_test/Hardening/{runid}
+2. open ace_testlist_ttlhg4_v1.xlsx in your laptop for better gui view
+3. tick for the testcase which required to be triggered in hardening
+4. dont forget to SAVE YOUR FILE
+5. run python3.11.1 main.py in vnc
+6. only regression trigger log result will be saved at /nfs/png/disks/png_viceipr_disk001/FalconRun/users/QUAL/Hardening_test/Hardening/{runid}
 
 ### !!!Precaution!!! 
-Please do not run for now as the required python library version is still not being imported and will not able to run
-Required scripts to fetch required python library for the automation process thus not affecting the vnc session
-Version 1.1 now only support perspec maestro without pytest (will be released in version 1.2)
+There are two main py file one is main.py another is main_yh.py, main.py will need user id for setting up env. 
+Developer has disable the excel release function for now. (Excel tickbox will auto uncheck after trigger)
 
 ### VERSION TO BE RELEASE
-### Version 1.2
-1. Increase coverage to pytest
-2. Provide libs to fetch required python library version
-### Version 1.2
-1. Introducing argument parsing mechanism which large number of testcase and group testcase -> An additional script which takes in feature tag as argument to trigger all testcase in input feature tag, or a script which pasting all the testcase to be triggered into a list and run the script
 ### Version 1.3
-3. Increase automation coverage to config file
+1. Introducing argument parsing mechanism which large number of testcase and group testcase -> An additional script which takes in feature tag as argument to trigger all testcase in input feature tag, or a script which pasting all the testcase to be triggered into a list and run the script
 ### Version 1.4
-1. Setup result fetching mechanism for hardening
+3. Increase automation coverage to config file
 ### Version 1.5
-1. Increase coverage to Qual and Mock
+1. Setup result fetching mechanism for hardening
 ### Version 1.6
+1. Increase coverage to Qual and Mock
+### Version 1.7
 1. Introducing excel result update for all hardening and qual result. Performing data analysis to scope down number of qual regression trigger. Only testcases that passed with targeted amount of seed triggered will only run in qual weekly run. (IDEA TO MANAGE QUAL REGRESSION NUMBER)
 
+OLD VERSION:
+###### Version 1.1
+Hardening Regression can now be trigger by automation with excel. Just select with checbox the testcase and trigger the main.py. Testlist will automatically be generated based on excel datasheet. Trigger of hardening regression is fully automated. 
