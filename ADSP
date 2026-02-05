@@ -1,0 +1,7 @@
+
+namenodes_arg = '--pysv_config=ttlhg4'
+
+test_load_fw = {'job': 'test_load_fw', 'type': 'pytest', 'args': [{'content_path': r'ipsv-ace\ipsv-pkg\ipsv\ace\pytest\dsp_test\test_load_fw.py::test_load_fw', 'pytest_args': namenodes_arg + '" -sv"', 'timeout': 600}]}
+
+
+TESTLINES_TO_BE_EXECUTE = [test_load_fw, ]

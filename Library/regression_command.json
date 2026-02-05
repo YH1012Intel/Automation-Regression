@@ -1,6 +1,6 @@
 {
     "hardening":{
                 "runci_pyfile" : "/p/ipval/farm/vice/tools/falcon/prod/runci.py",
-                "platform_exclude" : ["pngfpga607", "pngfpga608", "pngfpga664", "pngfpga668", "pngfpga623", "kmfpga611"]
+                "platform_exclude" : ["pngfpga607", "pngfpga608", "pngfpga664", "pngfpga668", "pngfpga623", "kmfpga611", "pngfpga669", "pngfpga616"]
                 }
 }

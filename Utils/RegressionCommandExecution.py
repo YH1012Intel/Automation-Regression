@@ -10,8 +10,8 @@ class RegressionCommandExecution:
         return f"{label}{' ' * padding}[{status}]"
 
     def main(self, cmd, output_regression_log_file):
-        print(f"{self.format_status_line('Regression Log', 'info')}: Time sleep 5 for background maestro execution")
-        time.sleep(5)
+        print(f"{self.format_status_line('Regression Log', 'info')}: Time sleep 10 for background maestro execution")
+        time.sleep(10)
         print(f"{self.format_status_line('Regression Log', 'info')}: Time sleep complete for background maestro execution")
         print(f"{self.format_status_line('Regression Log', 'info')}: Executing Hardening Regression command")
         process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)

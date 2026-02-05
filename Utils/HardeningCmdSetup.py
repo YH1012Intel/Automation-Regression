@@ -11,7 +11,7 @@ class HardeningCmdSetup():
         padding = max(40 - len(f"{label} [{status}]: "), 0)
         return f"{label}{' ' * padding}[{status}]"
 
-    def main(self, testcase_amount, testlist_output_file, config_file):
+    def main(self, testcase_amount, testlist_output_file, config_file, platform=None):
 
         print(f"{self.format_status_line('Hardening Regression CMD Log', 'info')}: Constructing Hardening Regression Command")
         # Read regresison cmd json file data
@@ -22,11 +22,21 @@ class HardeningCmdSetup():
         hardening_regression_cmd_data = json_data_regression['hardening']
         # Extract runci py file path
         runci_pyfile = hardening_regression_cmd_data['runci_pyfile']
-        # Set for platform amount to be used in this regression max to 8
-        platform_amount = testcase_amount if testcase_amount <= 8 else 8
-        # Extract excluded platform
-        platform_exclude = hardening_regression_cmd_data['platform_exclude']
-        hardening_cmd = f"python3.11.1 {runci_pyfile} -m hardening -c {config_file} -t {testlist_output_file} -n{platform_amount} --exclude {' '.join(platform_exclude)}"
+
+        #Normal Condition
+        if platform == None:
+            # Set for platform amount to be used in this regression max to 8
+            platform_amount = testcase_amount if testcase_amount <= 8 else 8
+            # Extract excluded platform
+            platform_exclude = hardening_regression_cmd_data['platform_exclude']
+
+            platform_cmd = f"-n{platform_amount} --exclude {' '.join(platform_exclude)}"
+
+        #Special Platform condition
+        else:
+            platform_cmd = f"-s {platform}"
+
+        hardening_cmd = f"python3.11.1 {runci_pyfile} -m hardening -c {config_file} -t {testlist_output_file} {platform_cmd}"
 
         print(f"{self.format_status_line('Hardening Regression CMD Log', 'CMD')}: {hardening_cmd}")
         print(f"{self.format_status_line('Hardening Regression CMD Log', 'PASS')}: Hardening Regression Command successfully constructed")

@@ -17,9 +17,9 @@ class ExcelTestcaseRetrival:
             checkbox = row[0]  
             if checkbox is True:
                 if row[1] == "perspec_maestro":
-                    data = [row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9]]
+                    data = [row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[13]]
                 elif row[1] == "pytest":
-                    data = [row[1], row[2], row[3], row[10], row[11], row[12]]
+                    data = [row[1], row[2], row[3], row[10], row[11], row[12], row[13]]
                 testcase_execute_list.append(data)
         return testcase_execute_list
 
