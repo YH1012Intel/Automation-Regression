@@ -1,21 +1,34 @@
 # Automation-Regression
-To automate the regression in mode of hardening, mock and qual to reduce human intervention
+To automate the regression in mode of hardening, mock and qual to reduce human intervention.
+Available Feature
+--------------------
+-> Covers Perspec Maestro and Pytest
+-> Excel checkbox run regression feature
+-> Auto sorting of testcase based on feature and validation_framework for each regression runid
 
 ### RELEASED VERSION
 ### Version 1.2
-In this new version, automation can now organize your test cases by both the validation framework (Pytest and Perspec Maestro) and the feature they covered. Each regression runid is linked to just one framework and one feature, so it’s easier to keep track of what’s being tested. All test cases for Pytest and Perspec Maestro are now included. User can track test cases based on which framework and feature they belong to based on regression runid, making everything easier to manage.
+In this new version, automation can now organize your test cases by both the validation framework (Pytest and Perspec Maestro) and the feature they covered. Each regression runid is linked to just one framework and one feature, so it’s easier to keep track of what’s being tested. All test cases for Pytest and Perspec Maestro are now included. User can track test cases based on which framework and feature they belong to based on regression runid, making everything easier to manage. Python Environment setup feature available to ensure functionability for every user.
 
 #### Steps to Trigger
-1. cd to /nfs/png/disks/png_viceipr_disk001/FalconRun/users/QUAL/Hardening_test/Automation-Regression
-2. open ace_testlist_ttlhg4_v1.xlsx in your laptop for better gui view
-3. tick for the testcase which required to be triggered in hardening
-4. dont forget to SAVE YOUR FILE
-5. run python3.11.1 main.py in vnc
-6. only regression trigger log result will be saved at /nfs/png/disks/png_viceipr_disk001/FalconRun/users/QUAL/Hardening_test/Hardening/{runid}
+1. cd to home directory /nfs/png/disks/png_viceipr_disk001/FalconRun/users/QUAL/Hardening_test/Automation-Regression 
+2. python3.11.1 libs/setup_env.py to setup python environment and download required libraries
+3. source pyenv/bin/activate.csh and make sure (py_env) shown at terminal
+4. can try pip list and check the library version :
+                                       Package         Version
+                                    --------------- -----------
+                                    numpy           2.2.0
+                                    openpyxl        3.1.5
+                                    pandas          2.3.0
+                                    xlsxwriter      3.2.9
+6. open ace_testlist_ttlhg4_v1.xlsx in your laptop for better gui view
+7. tick for the testcase which required to be triggered in hardening
+8. dont forget to SAVE YOUR FILE
+9. run python3.11.1 main.py 
+10. only regression trigger log result will be saved at /nfs/png/disks/png_viceipr_disk001/FalconRun/users/QUAL/Hardening_test/Hardening/{runid}
 
 ### !!!Precaution!!! 
-There are two main py file one is main.py another is main_yh.py, main.py will need user id and password (dunno whre can get) for setting up env. 
-Developer has disable the excel release function for now. (Excel tickbox will auto uncheck after trigger)
+No for now
 
 ### VERSION TO BE RELEASE
 ### Version 1.3
