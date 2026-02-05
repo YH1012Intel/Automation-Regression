@@ -1,6 +1,6 @@
 # Automation-Regression
 
-To automate the regression in mode of hardening, mock and qual to reduce human intervention.
+This automation project streamlines regression testing in hardening, mock, and qualification modes, significantly reducing manual intervention. The solution leverages Excel-based test selection and automated scripting to organize, trigger, and track regression runs efficiently.
 
 
 
@@ -12,12 +12,16 @@ Available Feature
 
 -> Auto sorting of testcase based on feature and validation_framework for each regression runid 
 
+-> Ability to trigger with selected special platform
+
 
 ## RELEASED VERSION
-### Version 1.2
-In this new version, automation can now organize your test cases by both the validation framework (Pytest and Perspec Maestro) and the feature they covered. Each regression runid is linked to just one framework and one feature, so it’s easier to keep track of what’s being tested. All test cases for Pytest and Perspec Maestro are now included. User can track test cases based on which framework and feature they belong to based on regression runid, making everything easier to manage. Python Environment setup feature available to ensure functionability for every user.
+### Version 1.3.1
+#### • Special Platform Feature:
 
-#### Steps to Trigger
+Users can now specify special platform requirements for individual test cases directly in the Excel sheet using a dropdown menu. The automation script identifies and sorts these test cases, triggering them with a dedicated regression command for special platforms.
+
+## Steps to Trigger
 1. CD to Automation Regression home directory
    
           cd /nfs/png/disks/png_viceipr_disk001/FalconRun/users/QUAL/Hardening_test/Automation-Regression
@@ -47,14 +51,16 @@ In this new version, automation can now organize your test cases by both the val
 
           python3.11.1 main.py
 9. Only regression trigger log result will be saved at /nfs/png/disks/png_viceipr_disk001/FalconRun/users/QUAL/Hardening_test/Hardening/{runid}
+10. To deactivate the python environment whenever not to be use
+    
+         deactivate
 
 ## !!!Precaution!!! 
 No for now
 
 ## VERSION TO BE RELEASE
-### Version 1.3
+### Version 1.3.2
 1. Introducing argument parsing mechanism which large number of testcase and group testcase -> An additional script which takes in feature tag as argument to trigger all testcase in input feature tag, or a script which pasting all the testcase to be triggered into a list and run the script
-2. Adding capability to select special platform
 ### Version 1.4
 1. Increase automation coverage to config file
 ### Version 1.5
@@ -64,6 +70,25 @@ No for now
 ### Version 1.7
 1. Introducing excel result update for all hardening and qual result. Performing data analysis to scope down number of qual regression trigger. Only testcases that passed with targeted amount of seed triggered will only run in qual weekly run. (IDEA TO MANAGE QUAL REGRESSION NUMBER)
 
-OLD VERSION:
-###### Version 1.1
-Hardening Regression can now be trigger by automation with excel. Just select with checbox the testcase and trigger the main.py. Testlist will automatically be generated based on excel datasheet. Trigger of hardening regression is fully automated. 
+## OLD VERSION:
+#### Version 1.2
+
+#### • Framework & Feature Organization:
+
+Automation now categorizes test cases by validation framework (Pytest or Perspec Maestro) and by feature. Each regression run is associated with a single framework and feature, simplifying tracking and management.
+
+#### • Comprehensive Test Coverage:
+
+All test cases for Pytest and Perspec Maestro are included.
+
+#### • Python Environment Setup:
+
+Automated environment setup ensures consistent functionality for all users.
+
+#### Version 1.1
+
+#### • Excel-Driven Hardening Regression:
+
+Users can select test cases via checkboxes in Excel and trigger automated regression runs using main.py. The test list is generated from the Excel datasheet, making the hardening regression process fully       automated.
+
+
