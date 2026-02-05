@@ -34,6 +34,6 @@ print(f"Environment '{env_name}' created with Python 3.11.1 and libraries instal
 
 
 # python3.11.1 libs/setup_env.py
-# source myenv/bin/activate.csh
+# source pyenv/bin/activate.csh
 # pip list
 # deactivate
