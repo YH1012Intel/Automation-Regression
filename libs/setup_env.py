@@ -33,7 +33,7 @@ for lib in python_libraries:
 print(f"Environment '{env_name}' created with Python 3.11.1 and libraries installed.")
 
 
-# python3.11.1 setup_env.py
+# python3.11.1 libs/setup_env.py
 # source myenv/bin/activate.csh
 # pip list
 # deactivate
