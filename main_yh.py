@@ -131,7 +131,6 @@ if __name__ == "__main__":
             print(f"{format_status_line('Main', 'info')}: RUN ID: {hardening_runid}")
             print(f"{format_status_line('Main', 'info')}: Regression log results are saved in {final_output_folder_path}")
             
-            returncode = 0
             if returncode == 0:
                 content_width = 70
                 print(f"+{'#' * content_width}+")

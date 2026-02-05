@@ -1,11 +1,3 @@
-import sys
-assert sys.version_info >= (3, 11)
-
-from pathlib import Path  # noqa: E402
-LIBS = Path(__file__).resolve().parents[0] / 'libs'
-sys.path.append(str(LIBS))
-
-import auto_package_install  
 
 from Utils.ExcelTestcaseRetrival import ExcelTestcaseRetrival
 from Utils.TestlistConstructor import TestlistConstructor
@@ -139,7 +131,6 @@ if __name__ == "__main__":
             print(f"{format_status_line('Main', 'info')}: RUN ID: {hardening_runid}")
             print(f"{format_status_line('Main', 'info')}: Regression log results are saved in {final_output_folder_path}")
             
-            returncode = 0
             if returncode == 0:
                 content_width = 70
                 print(f"+{'#' * content_width}+")
