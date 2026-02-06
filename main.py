@@ -57,6 +57,7 @@ def format_status_line(label, status):
     return f"{label}{' ' * padding}[{status}]"
 
 def regression_function(testcase_execute_list, validation_framework, platform=None):
+    summary_result = []
     
     for feature_testcase in testcase_execute_list:
         testlist = []
@@ -96,16 +97,16 @@ def regression_function(testcase_execute_list, validation_framework, platform=No
         hardening_cmd = function_hardening_cmd.main(len(simpliflied_testcase_execute_list), testlist_output_file, config_output_file, platform)
         returncode = 0
         # # Run Command
-        # function_regression_trigger = RegressionCommandExecution()
-        # stdout, stderr, returncode = function_regression_trigger.main(hardening_cmd, output_regression_log_file)
+        function_regression_trigger = RegressionCommandExecution()
+        stdout, stderr, returncode = function_regression_trigger.main(hardening_cmd, output_regression_log_file)
 
-        # # Extract the Runid and rename the output folder to Runid
-        # hardening_runid = runid_extraction(output_regression_log_file)
-        # print(f"{format_status_line('Main', 'info')}: RUN ID: {hardening_runid}")
-        # final_output_folder_path = os.path.join(os.path.dirname(temporary_output_folder_path), hardening_runid)
-        # os.rename(temporary_output_folder_path, final_output_folder_path)
+        # Extract the Runid and rename the output folder to Runid
+        hardening_runid = runid_extraction(output_regression_log_file)
+        print(f"{format_status_line('Main', 'info')}: RUN ID: {hardening_runid}")
+        final_output_folder_path = os.path.join(os.path.dirname(temporary_output_folder_path), hardening_runid)
+        os.rename(temporary_output_folder_path, final_output_folder_path)
         
-        # print(f"{format_status_line('Main', 'info')}: Regression log results are saved in {final_output_folder_path}")
+        print(f"{format_status_line('Main', 'info')}: Regression log results are saved in {final_output_folder_path}")
 
         content_width = 70
         if returncode == 0:
@@ -117,6 +118,12 @@ def regression_function(testcase_execute_list, validation_framework, platform=No
             print(f"{' ' * 33}FAIL{' ' * 33}")
             print(f"+{'#' * content_width}+")
         
+        if platform == None:
+            summary_result.append([None, validation_framework, feature_testcase, testlist, hardening_runid, returncode])
+        else:
+            summary_result.append([platform, validation_framework, feature_testcase, testlist, hardening_runid, returncode])
+    
+    return summary_result
 
 
 if __name__ == "__main__":
@@ -160,7 +167,8 @@ if __name__ == "__main__":
                 
                 advanced_testcase_execute_list[validation_framework][0] = VolumeHardeningOutputFolderConstructor(advanced_testcase_execute_list[validation_framework][0], home_dir)
             
-            regression_function(advanced_testcase_execute_list[validation_framework][0], validation_framework)
+            summary_result = regression_function(advanced_testcase_execute_list[validation_framework][0], validation_framework)
+            for summary_data in summary_result: summarize_list.append(summary_data)
             
 
         #Special Platform
@@ -175,4 +183,36 @@ if __name__ == "__main__":
                     #Testcase
                     advanced_testcase_execute_list[validation_framework][0][platform][validation_framework_sp] = VolumeHardeningOutputFolderConstructor(advanced_testcase_execute_list[validation_framework][0][platform][validation_framework_sp], home_dir, validation_framework_sp, platform)
 
-                    regression_function(advanced_testcase_execute_list[validation_framework][0][platform][validation_framework_sp], validation_framework_sp, platform)
+                    summary_result = regression_function(advanced_testcase_execute_list[validation_framework][0][platform][validation_framework_sp], validation_framework_sp, platform)
+                    for summary_data in summary_result: summarize_list.append(summary_data)
+            
+
+    #Summary
+    print(summarize_list)
+    content_width = 78
+    print(f"#{'=' * content_width}#")
+    print(f"|{' ' * content_width}|")
+    print("|", " "*27, "Summarize_regression", " "*27, "|")
+    print("|", " "*20, "="*34, " "*20, "|")
+    print("|", " "*30, "              ", " "*30, "|")
+    count = 1
+    for summary_data in summarize_list:
+        #print("summary_Data" , summary_data)
+        print(format_info_line("Regression Number", count, content_width))
+        if summary_data[0] != None:
+            print(format_info_line("Special Platform", summary_data[0], content_width))
+        print(format_info_line("Validation Framework", summary_data[1], content_width))
+        print(format_info_line("Feature", summary_data[2], content_width))
+        for testcase in summary_data[3]:
+            print(format_info_line("Testcase", testcase, content_width))
+        if summary_data[4] != None:
+            print(format_info_line("RUNID", summary_data[4], content_width))
+        else:
+            print(format_info_line("RUNID", "None", content_width))
+        print(format_info_line("Regression Result", "PASS" if summary_data[5] == 0 else "FAIL", content_width))
+        print("|",  "="*76, "|")
+        print("|",  " "*76, "|")
+        count += 1
+    print(f"|{' ' * content_width}|")
+    print(f"|{'=' * content_width}|")
+        
