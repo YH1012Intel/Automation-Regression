@@ -16,10 +16,14 @@ Available Feature
 
 
 ## RELEASED VERSION
-### Version 1.3.1
+### Version 1.3.1.2
 #### • Special Platform Feature:
 
 Users can now specify special platform requirements for individual test cases directly in the Excel sheet using a dropdown menu. The automation script identifies and sorts these test cases, triggering them with a dedicated regression command for special platforms.
+
+#### • Summarize Regression Trigger Result Feature:
+
+Automation Script will summarize based on Validation Framework, Special Platform Request, Feature Tags, Testcases, Runid and Trigger Result (PASS, FAIL).
 
 ## Steps to Trigger
 1. CD to Automation Regression home directory
