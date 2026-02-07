@@ -12,7 +12,7 @@ Available Feature
 
 ->Comprehensive test coverage for Pytest and Perspec Maestro
 
-->Automated Python environment setup
+->Semi-automated Python environment setup
 
 ->Special platform selection for individual test cases via Excel dropdown
 
@@ -22,7 +22,7 @@ Available Feature
 
 
 
-## RELEASED VERSION
+## NEW RELEASED VERSION
 
 #### Version 1.3.2
 
@@ -115,7 +115,7 @@ Example 6 (dual method inputs with different validation framework) [takes in 2 v
          deactivate
 
 ## !!!Precaution!!! 
-No for now
+Excel Refresh is disable for now as project is still under testrun
 
 ## VERSION TO BE RELEASE
 ### Version 1.4
@@ -128,7 +128,7 @@ No for now
 ### Version 1.7
 1. Introducing excel result update for all hardening and qual result. Performing data analysis to scope down number of qual regression trigger. Only testcases that passed with targeted amount of seed triggered will only run in qual weekly run. (IDEA TO MANAGE QUAL REGRESSION NUMBER)
 
-## OLD VERSION:
+## RELEASED VERSION:
 ### Version 1.3.1.2
 #### • Special Platform Feature:
 
