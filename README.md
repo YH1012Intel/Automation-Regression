@@ -119,8 +119,7 @@ Excel Refresh is disable for now as project is still under testrun
 
 ## VERSION TO BE RELEASE
 ### Version 1.4
-1. An additional script which takes in feature tag as argument to trigger all testcase in input feature tag, or a script which pasting all the testcase to be triggered into a list and run the script
-2. Increase automation coverage to config file
+1. Increase automation coverage to config file
 ### Version 1.5
 1. Setup result fetching mechanism for hardening
 ### Version 1.6
