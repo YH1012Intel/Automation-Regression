@@ -212,7 +212,7 @@ if __name__ == "__main__":
     home_dir = os.getcwd()
 
     #Input file 
-    testlist_excel = os.path.join(home_dir, 'ace_testlist_ttlhg4_v1_1.xlsx')
+    testlist_excel = os.path.join(home_dir, 'ace_testlist_ttlhg4_v1.xlsx')
     config_perspec_maestro_file = "ace_config_qual_ttlhg4.py"
     config_pytest_file = "ace_pytest_qual_config_ttlhg4.py"
 
