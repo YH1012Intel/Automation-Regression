@@ -6,9 +6,12 @@ from Utils.HardeningOutputFolderConstructor import HardeningOutputFolderConstruc
 from Utils.RegressionCommandExecution import RegressionCommandExecution
 from Utils.TestcaseArragement import TestcaseArragement
 
+import argparse
+from datetime import datetime
 import os
 import shutil
-from datetime import datetime
+import sys
+
 
 def fetchdaytime():
     now = datetime.now()
@@ -125,6 +128,77 @@ def regression_function(testcase_execute_list, validation_framework, platform=No
     
     return summary_result
 
+def parse_filter_arg(filter_args, parser):
+
+    val_error_flag = True
+    filters = {}
+    validation_framework_history = ""
+    filters["perspec_maestro"] = {}
+    filters["perspec_maestro"]["tag"] = []
+    filters["perspec_maestro"]["testcase"] = []
+    filters["pytest"] = {}
+    filters["pytest"]["tag"] = []
+    filters["pytest"]["testcase"] = []
+    tag_list_pytest = []
+    tag_list_perspec_maestro = []
+    testcase_list_pytest = []
+    testcase_list_perspec_maestro = []
+    #Check for items in filter
+    for item in filter_args:
+        #For item key=value given
+        if '=' in item:
+            #Split key and value with =
+            key, value = item.split('=', 1)
+            #Raise error if key= , not given value
+            if value == "":
+                parser.error(f'--filter {item} is not a valid, key=value pair.')
+            #Raise error if key=valuekey=value, no splitting between key=value
+            elif '=' in value:
+                parser.error(f'--filter {item} is not a valid, space needed between key=value key=value.')
+            #Perfect Condition
+            else:
+                if key=="val" or key == "tag" or key == "config_location":
+                    #Raise error if validation framework is not in command
+                    if key=="val" and value  not in ["perspec_maestro", "pm", "pytest", "pt"]:
+                        parser.error(f'--filter {item} is not a valid, validation_framework "val" only recognise [perspec_maestro, pm, pytest, pt].')
+                    else:
+                        ## Gold Condition
+                        ## Store data
+                        if key == "val": 
+                            val_error_flag=False
+                            if value == "pm": value = "perspec_maestro"
+                            elif value == "pt": value = "pytest"
+                            validation_framework_history = value
+                        else:
+                            if validation_framework_history == "pytest":
+                                if key == "tag":
+                                    if value not in tag_list_pytest:
+                                        tag_list_pytest.append(value)
+                                elif key == "config_location":
+                                    if value not in testcase_list_pytest:
+                                        testcase_list_pytest.append(value)
+                            elif validation_framework_history == "perspec_maestro":
+                                if key == "tag":
+                                    if value not in tag_list_perspec_maestro:
+                                        tag_list_perspec_maestro.append(value)
+                                elif key == "config_location":
+                                    if value not in testcase_list_perspec_maestro:
+                                        testcase_list_perspec_maestro.append(value)
+                #Raise error if key not tag or config_location
+                else:
+                    parser.error(f'--filter {item} is not a valid, key only recognise [val, tag, config_location].')
+        #Raise error if no format of key=value given after --filter
+        else:
+            parser.error(f'--filter {item} is not a valid, key=value pair.')   
+    #Raise error if validation framework is not given
+    if val_error_flag == True:
+        parser.error(f'--filter val is not a given, validation_framework "val" only recognise [perspec_maestro, pm, pytest, pt]')
+    filters["perspec_maestro"]["tag"] = tag_list_perspec_maestro
+    filters["perspec_maestro"]["testcase"] = testcase_list_perspec_maestro
+    filters["pytest"]["tag"] = tag_list_pytest
+    filters["pytest"]["testcase"] = testcase_list_pytest
+    return filters
+
 
 if __name__ == "__main__":
 
@@ -137,16 +211,42 @@ if __name__ == "__main__":
     
     home_dir = os.getcwd()
 
-    # Input file 
-    testlist_excel = os.path.join(home_dir, 'ace_testlist_ttlhg4_v1.xlsx')
+    #Input file 
+    testlist_excel = os.path.join(home_dir, 'ace_testlist_ttlhg4_v1_1.xlsx')
     config_perspec_maestro_file = "ace_config_qual_ttlhg4.py"
     config_pytest_file = "ace_pytest_qual_config_ttlhg4.py"
+
+    #Argument Parsing section
+    parser = argparse.ArgumentParser(description="Automation Hardening Regression Script")
+
+    parser.add_argument(
+                        '--filter',
+                        nargs='+',
+                        help='Filter (required if trigger is "argument"): "val=..." and ("tag=..." and/or "config_location=...")'
+                        )
+    args = parser.parse_args()
     
     ## Main Flow ##
-    
-    #Extract testcase
-    excel_function = ExcelTestcaseRetrival(testlist_excel)
-    testcase_execute_list = excel_function.main()
+
+    #Inputs processing
+    #Argument Parsing Input
+    if args.filter:
+        print(f"{format_status_line('Main', 'info')}: Accepted argument parsing inputs")
+        argument_filtered_testcase = parse_filter_arg(args.filter, parser)
+        excel_function = ExcelTestcaseRetrival(testlist_excel)
+        testcase_execute_list = excel_function.main_argument(argument_filtered_testcase)
+    #Excel Checkbox Input
+    else:
+        print(f"{format_status_line('Main', 'info')}: No argument parsing inputs detected, proceeds with checking for excel checkbox inputs")
+        #Extract testcase
+        excel_function = ExcelTestcaseRetrival(testlist_excel)
+        testcase_execute_list = excel_function.main_excel()
+
+    #Raise error and exit system if no argument and excel checkbox detected
+    if len(testcase_execute_list) == 0:
+        print(f"{format_status_line('Main', 'FAIL')}: No argument parsing inputs detected, No excel checkbox inputs detected")
+        print(f"{format_status_line('Main', 'info')}: Exiting Automation Regression Script")
+        sys.exit()
 
     function_testcase = TestcaseArragement()
     advanced_testcase_execute_list = function_testcase.main(testcase_execute_list)
@@ -188,7 +288,6 @@ if __name__ == "__main__":
             
 
     #Summary
-    print(summarize_list)
     content_width = 78
     print(f"#{'=' * content_width}#")
     print(f"|{' ' * content_width}|")
