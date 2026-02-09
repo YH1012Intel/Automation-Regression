@@ -48,7 +48,7 @@ Argument Parsing prefered for user which have their testcase's naming ready or f
           python3.11.1 libs/setup_env.py
 3. Source python environement and make sure (py_env) shown at terminal
 
-          source pyenv/bin/activate.csh
+          source py_env/bin/activate.csh
 4. Can try pip list and check the library version :
 
           pip list
