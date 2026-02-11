@@ -120,12 +120,10 @@ Excel Refresh is disable for now as project is still under testrun
 ## VERSION TO BE RELEASE
 ### Version 1.4
 1. Increase automation coverage to config file
-### Version 1.5
-1. Setup result fetching mechanism for hardening
-### Version 1.6
-1. Increase coverage to Qual and Mock
-### Version 1.7
-1. Introducing excel result update for all hardening and qual result. Performing data analysis to scope down number of qual regression trigger. Only testcases that passed with targeted amount of seed triggered will only run in qual weekly run. (IDEA TO MANAGE QUAL REGRESSION NUMBER)
+### Version 2 (TO COMPLETE AFTER CNY) [Can be called as: AUTOMATION REGRESSION COUNTER]
+1. Upgrade the excel as a form. User can fill in the regression requirement and testcase to run, save the excel in a folder. The automation will detect available excel file in the folder and run it. This allow user to trigger regression even with own machine. Greatly reduce manual work to minimal. (Inputs filling must be manual as machine will not know what user thinking wihout inputs).
+2. Naming as AUTOMATION REGRESSION COUNTER-> example in the scenario in bank where we fill in the form that what service we required, queue and submit to the counter and wait for the service to be completed. ALL background work will be completed by automation. 
+
 
 ## RELEASED VERSION:
 ### Version 1.3.1.2
