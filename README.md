@@ -23,12 +23,12 @@ Available Feature
 
 
 ## NEW RELEASED VERSION
+#### Version 1.4 trial version
 
-#### Version 1.3.2
+#### • Automation Config File Generation Feature:
 
-#### • Argument Parsing Mechanism:
+Introduced automated generating config file based on inputs, or without inputs. User can inputs testcycle, fpga image, maestro catogery, maestro branch name and extrnal system provisioning. This version is will not fully covered to excel method in which there will be an extra version for the excel method. Pre-validation of inputs data is in developing... Steps to trigger will also be updated later... Will try to run more testing for validation function of this feature.
 
-Introduced an argument parsing mechanism that allows users to trigger the automation script by specifying a feature tag, a list of test cases, or both as input arguments. This enhancement streamlines the workflow by reducing the manual effort of selecting test cases via checkboxes in Excel, especially when dealing with a large number of test cases. The automation script will automatically identify and execute all relevant test cases based on the provided feature tag. For scenarios involving a small number of test cases, argument parsing offers a more efficient alternative to manual selection, further minimizing repetitive tasks. Combining feature tags and specific test cases as arguments provides greater flexibility and efficiency compared to the traditional checkbox method.
 
 ## Steps to Trigger
 AS there are some required external python libraries and different python libraries versions, would required to setup python evironment before executing the automation regression. Please follow the detailed guidelines for python environment setup below. To deactivate the python environment, detailed steps provided at end of the section.
@@ -48,7 +48,7 @@ Argument Parsing prefered for user which have their testcase's naming ready or f
           python3.11.1 libs/setup_env.py
 3. Source python environement and make sure (py_env) shown at terminal
 
-          pyenv/bin/activate.csh
+          source py_env/bin/activate.csh
 4. Can try pip list and check the library version :
 
           pip list
@@ -120,14 +120,18 @@ Excel Refresh is disable for now as project is still under testrun
 ## VERSION TO BE RELEASE
 ### Version 1.4
 1. Increase automation coverage to config file
-### Version 1.5
-1. Setup result fetching mechanism for hardening
-### Version 1.6
-1. Increase coverage to Qual and Mock
-### Version 1.7
-1. Introducing excel result update for all hardening and qual result. Performing data analysis to scope down number of qual regression trigger. Only testcases that passed with targeted amount of seed triggered will only run in qual weekly run. (IDEA TO MANAGE QUAL REGRESSION NUMBER)
+### Version 2 (TO COMPLETE AFTER CNY) [Can be called as: AUTOMATION REGRESSION COUNTER]
+1. Upgrade the excel as a form. User can fill in the regression requirement and testcase to run, save the excel in a folder. The automation will detect available excel file in the folder and run it. This allow user to trigger regression even with own machine. Greatly reduce manual work to minimal. (Inputs filling must be manual as machine will not know what user thinking wihout inputs).
+2. Naming as AUTOMATION REGRESSION COUNTER-> example in the scenario in bank where we fill in the form that what service we required, queue and submit to the counter and wait for the service to be completed. ALL background work will be completed by automation. 
+
 
 ## RELEASED VERSION:
+#### Version 1.3.2
+
+#### • Argument Parsing Mechanism:
+
+Introduced an argument parsing mechanism that allows users to trigger the automation script by specifying a feature tag, a list of test cases, or both as input arguments. This enhancement streamlines the workflow by reducing the manual effort of selecting test cases via checkboxes in Excel, especially when dealing with a large number of test cases. The automation script will automatically identify and execute all relevant test cases based on the provided feature tag. For scenarios involving a small number of test cases, argument parsing offers a more efficient alternative to manual selection, further minimizing repetitive tasks. Combining feature tags and specific test cases as arguments provides greater flexibility and efficiency compared to the traditional checkbox method.
+
 ### Version 1.3.1.2
 #### • Special Platform Feature:
 
