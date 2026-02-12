@@ -23,12 +23,12 @@ Available Feature
 
 
 ## NEW RELEASED VERSION
+#### Version 1.4 trial version
 
-#### Version 1.3.2
+#### • Automation Config File Generation Feature:
 
-#### • Argument Parsing Mechanism:
+Introduced automated generating config file based on inputs, or without inputs. User can inputs testcycle, fpga image, maestro catogery, maestro branch name and extrnal system provisioning. This version is will not fully covered to excel method in which there will be an extra version for the excel method. Pre-validation of inputs data is in developing... Steps to trigger will also be updated later... Will try to run more testing for validation function of this feature.
 
-Introduced an argument parsing mechanism that allows users to trigger the automation script by specifying a feature tag, a list of test cases, or both as input arguments. This enhancement streamlines the workflow by reducing the manual effort of selecting test cases via checkboxes in Excel, especially when dealing with a large number of test cases. The automation script will automatically identify and execute all relevant test cases based on the provided feature tag. For scenarios involving a small number of test cases, argument parsing offers a more efficient alternative to manual selection, further minimizing repetitive tasks. Combining feature tags and specific test cases as arguments provides greater flexibility and efficiency compared to the traditional checkbox method.
 
 ## Steps to Trigger
 AS there are some required external python libraries and different python libraries versions, would required to setup python evironment before executing the automation regression. Please follow the detailed guidelines for python environment setup below. To deactivate the python environment, detailed steps provided at end of the section.
@@ -126,6 +126,12 @@ Excel Refresh is disable for now as project is still under testrun
 
 
 ## RELEASED VERSION:
+#### Version 1.3.2
+
+#### • Argument Parsing Mechanism:
+
+Introduced an argument parsing mechanism that allows users to trigger the automation script by specifying a feature tag, a list of test cases, or both as input arguments. This enhancement streamlines the workflow by reducing the manual effort of selecting test cases via checkboxes in Excel, especially when dealing with a large number of test cases. The automation script will automatically identify and execute all relevant test cases based on the provided feature tag. For scenarios involving a small number of test cases, argument parsing offers a more efficient alternative to manual selection, further minimizing repetitive tasks. Combining feature tags and specific test cases as arguments provides greater flexibility and efficiency compared to the traditional checkbox method.
+
 ### Version 1.3.1.2
 #### • Special Platform Feature:
 
