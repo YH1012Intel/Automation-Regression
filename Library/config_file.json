@@ -1,0 +1,188 @@
+{
+
+    "perspec_maestro":   {
+                            "maestro_github_remote_side_branch":    {
+                                                                        "BB_NAME":  {"default": "MAESTRO_GITHUB_SETUP"},
+                                                                        "branch":   {
+                                                                                        "default": "26WW05p3_TAM_TTLHG4",
+                                                                                        "2605p3_TAM": "26WW05p3_TAM_TTLHG4",
+                                                                                        "kokheng_tts": "kokheng_tts_clear_ntk"
+                                                                                    }
+                                                                        
+                                                                    },
+                            "maestro_repo": {   
+                                                "BB_NAME":  {"default": "MAESTRO_REPO_LOCAL_NFS"},
+                                                "skip_copy":    {"default": "False"},
+                                                "ingredient_source":    {
+                                                                            "default": "/nfs/png/disks/png_coesv_disk001/users/abdulla5/repo/r3/iag_maestro-repo",
+                                                                            "helmi_repo": "/nfs/png/disks/png_coesv_disk001/users/abdulla5/repo/r3/iag_maestro-repo",
+                                                                            "lkhaw_repo": "/nfs/png/disks/png_coesv_disk003/lkhaw/maestro"
+                                                                        }
+                                            },
+                            "coverage_github_setup":    {
+                                                            "BB_NAME":  {"default": "COVERAGE_GITHUB_SETUP"},
+                                                            "database": {"default": "coverage_ttl_ace_db"}
+                                                        },
+                            "haps_programming":         {
+                                                            "BB_NAME":  {"default": "HAPS_PROGRAMMING"},
+                                                            "BB_TAG":   {"default": "26WW05_TTLHGen4"},
+                                                            "ingredient_fpga_image":    {
+                                                                                            "default": "TTL_ttl-ace-ipfpga-cth-2026-01-21-ace4px-drop-3_HAPS_80_build0_upf_Vivado_par_directive_v6.2021.2",
+                                                                                            "drop3build0v62021": "TTL_ttl-ace-ipfpga-cth-2026-01-21-ace4px-drop-3_HAPS_80_build0_upf_Vivado_par_directive_v6.2021.2",
+                                                                                            "drop3build0v62019": "TTL_ttl-ace-ipfpga-cth-2026-01-21-ace4px-drop-3_HAPS_80_build0_upf_Vivado_par_directive_v6.2019.1"
+                                                                                        }
+                                                        },
+                            "sonora_fec":               {   
+                                                            "BB_NAME":  {"default": "SONORA_FEC_PROGRAMMING"},
+                                                            "ingredient_fec_sof_image_1": {"default": "/nfs/png/disks/png_coesv_disk001/Test_Card/Sonora2_enabling/SSP/230503/test_card_top_FEC1.sof"}
+                                                        },
+                            "power_cycle_sut":          {
+                                                            "BB_NAME": {"default": "POWER_SPLITTER_PORT_POWER_CYCLE"},
+                                                            "port_value": {"default": 0},
+                                                            "duration": {"default": 10}
+                                                        },
+                            "maestro_system_discovery": {
+                                                            "BB_NAME": {"default": "MAESTRO_SYSTEM_DISCOVERY"},
+                                                            "maestro_tags": {"default": "ttlhg4.fpga.logall"}
+                                                        },
+                            "verify_fpga":              {
+                                                            "BB_NAME": {"default": "VERIFY_PLATFORM_CONFIG_XML"},
+                                                            "ingredient_devices": {"default": "0x0BCD"}
+                                                        },
+                            "fpga_perspec_maestro":     {
+                                                            "acquire_ingredients":  {
+                                                                                        "default": ["coverage_github_setup", "maestro_github_remote_side_branch"],
+                                                                                        "maestro_github_remote_side_branch": ["coverage_github_setup", "maestro_github_remote_side_branch"],
+                                                                                        "maestro_repo": ["maestro_repo"]
+                                                                                    },
+                                                            "system_provisioning":  {
+                                                                                        "default": ["'USB_REDIRECTOR_SHARE_DEVICES'", "haps_programming", "power_cycle_sut", "'BLOCKING_SUT_UNTIL_BOOT_INTO_F6'", "'GENERATE_PLATFORM_CONFIG_XML'", "verify_fpga"],
+                                                                                        "sonora_fec": ["'USB_REDIRECTOR_SHARE_DEVICES'", "sonora_fec", "haps_programming", "power_cycle_sut", "'BLOCKING_SUT_UNTIL_BOOT_INTO_F6'", "'GENERATE_PLATFORM_CONFIG_XML'", "verify_fpga"]
+                                                                                    },
+                                                            "system_discovery":     {
+                                                                                        "default": ["maestro_system_discovery", "power_cycle_sut", "'BLOCKING_SUT_UNTIL_BOOT_INTO_F6'"]
+                                                                                    },
+                                                            "testline_recovery":    {
+                                                                                        "default": ["power_cycle_sut", "'BLOCKING_SUT_UNTIL_BOOT_INTO_F6'"]
+                                                                                    },
+                                                            "testline_execution":   {
+                                                                                        "default": ["'PERSPEC_CONTENT_GENERATION'", "'MAESTRO_WORKFLOW'"]
+                                                                                    },
+                                                            "maestro_workflow_seed_recovery":   {
+                                                                                                    "default": ["power_cycle_sut", "'BLOCKING_SUT_UNTIL_BOOT_INTO_F6'"]
+                                                                                                }
+
+                                                        },
+                            "CONFIG":                   {
+                                                            "ip":               {"default": "ace"},
+                                                            "project":          {"default": "TTL"},
+                                                            "val_environment":  {"default": "fpga"},
+                                                            "val_framework":    {"default": "perspec_maestro"},
+                                                            "hardwareclass":    {"default": "IP_ACE"},
+                                                            "manifest_type":    {"default": "fpga_perspec_maestro"},
+                                                            "manifest_args":    {"default": "fpga_perspec_maestro"},
+                                                            "testcycle":        {
+                                                                                    "uv2IPC": "ACE_TTLPCDH_Gen4.ip_uv2.ip.ace.TTL_PCDH_IPC.QoVr1",
+                                                                                    "uv2VVD": "ACE_TTLPCDH_Gen4.ip_uv2.ip.ace.TTL_PCDH_VVD.QoVr1",
+                                                                                    "fvIPC":  "ACE_TTLPCDH_Gen4.ip_fv.ip.ace.TTL_PCDH_IPC.QoVr1",
+                                                                                    "fvVVD":  "ACE_TTLPCDH_Gen4.ip_fv.ip.ace.TTL_PCDH_VVD.QoVr1"
+                                                                                },
+                                                            "environment_variables":    {"default": ["'MAESTRO_FRAMEWORK': 'UNIFIED'", "'DISCOVERY_SAFELIST_ACE': '1'", "'DISCOVERY_SAFELIST_SONORA': '1'", "'ACEFW': 'DEBUG'"]},
+                                                            "setup_settings":   {"default": []}
+                                                        }
+                        },
+
+    "pytest":           {
+                            "phases":   {
+                                            "system_provisioning":      [
+                                                                        {
+                                                                            "BB_NAME":          {"default": "PIP_INSTALL_VCS_URL"},
+                                                                            "branch":           {
+                                                                                                    "default": "master",
+                                                                                                    "master" : "master",
+                                                                                                    "biultr" : "biu-ltr",
+                                                                                                    "lkhaw"  : "lkhaw-register-ml1-test"
+                                                                                                },
+                                                                            "url":              {"default": "https://github.com/intel-restricted/frameworks.validation.pythonsv.ipsv.ace"},
+                                                                            "subdirectory":     {"default": "ipsv-pkg"}
+                                                                        },
+                                                                        {
+                                                                            "BB_NAME":          {"default": "VERIFY_ITP_CONNECTION"}
+                                                                        },
+                                                                        {
+                                                                            "BB_NAME":          {"default": "RESET_ITP_CONNECTION"}
+                                                                        },
+                                                                        {
+                                                                            "BB_NAME":          {"default": "VERIFY_COREGROUPS_AND_DEVICES"},
+                                                                            "coregroups":       {"default": ["GPC"]},
+                                                                            "devices":          {"default": []}
+                                                                        },
+                                                                        {
+                                                                            "BB_NAME":          {"default": "HAPS_PROGRAMMING"},
+                                                                            "ingredient_fpga_image":{
+                                                                                                        "default": "TTL_ttl-ace-ipfpga-cth-2026-01-21-ace4px-drop-3_HAPS_80_build0_upf_Vivado_par_directive_v6.2021.2",
+                                                                                                        "drop3build0v62021": "TTL_ttl-ace-ipfpga-cth-2026-01-21-ace4px-drop-3_HAPS_80_build0_upf_Vivado_par_directive_v6.2021.2",
+                                                                                                        "drop3build0v62019": "TTL_ttl-ace-ipfpga-cth-2026-01-21-ace4px-drop-3_HAPS_80_build0_upf_Vivado_par_directive_v6.2019.1"
+                                                                                                    }
+                                                                        },
+                                                                        {
+                                                                            "BB_NAME":          {"default": "USB_REDIRECTOR_UNSHARE_DEVICES"}
+                                                                        },
+                                                                        {
+                                                                            "BB_NAME":          {"default": "POWER_SPLITTER_PORT_POWER_CYCLE"},
+                                                                            "port_value":       {"default": 0},
+                                                                            "duration":         {"default": 10}
+                                                                        },
+                                                                        {
+                                                                            "BB_NAME":          {"default": "BLOCKING_SUT_UNTIL_BOOT_INTO_F6"}
+                                                                        },
+                                                                        {
+                                                                            "BB_NAME":          {"default": "GENERATE_PLATFORM_CONFIG_XML"}
+                                                                        }
+                                                                        ],
+                                            "testline_execution":       [
+                                                                        {
+                                                                            "BB_NAME":          {"default": "RESET_ITP_CONNECTION"}
+                                                                        },
+                                                                        {
+                                                                            "BB_NAME":          {"default": "VERIFY_ITP_CONNECTION"}
+                                                                        },
+                                                                        {
+                                                                            "BB_NAME":          {"default": "POWER_SPLITTER_PORT_POWER_CYCLE"},
+                                                                            "port_value":       {"default": 0},
+                                                                            "duration":         {"default": 10}
+                                                                        },
+                                                                        {
+                                                                            "BB_NAME":          {"default": "BLOCKING_SUT_UNTIL_BOOT_INTO_F6"}
+                                                                        },
+                                                                        {
+                                                                            "BB_NAME":          {"default": "RUN_PYTEST"},
+                                                                            "environment_variables":    {
+                                                                                                            "PYTHONPATH": {"default": "D:\\falcon\\pytest\\src\\ipsv-ace\\pysvext-pkg"},
+                                                                                                            "PYSV_PATH" : {"default": "D:\\falcon\\pytest\\src\\ipsv-ace\\ipsv-pkg\\ipsv\\ace"}
+                                                                                                        }
+                                                                            
+                                                                        }
+                                                                        ]
+                                        },
+                            "CONFIG":   {
+                                            "ip":                       {"default": "ace"},
+                                            "testcycle":                {
+                                                                            "uv2IPC": "ACE_TTLPCDH_Gen4.ip_uv2.ip.ace.TTL_PCDH_IPC.QoVr1",
+                                                                            "uv2VVD": "ACE_TTLPCDH_Gen4.ip_uv2.ip.ace.TTL_PCDH_VVD.QoVr1",
+                                                                            "fvIPC":  "ACE_TTLPCDH_Gen4.ip_fv.ip.ace.TTL_PCDH_IPC.QoVr1",
+                                                                            "fvVVD":  "ACE_TTLPCDH_Gen4.ip_fv.ip.ace.TTL_PCDH_VVD.QoVr1"
+                                                                        },
+                                            "project":                  {"default": "TTL"},
+                                            "environment":              {"default": "fpga"},
+                                            "val_framework":            {"default": "pytest"},
+                                            "val_environment":          {"default": "fpga"},
+                                            "manifest_args":            {"default": "phases"},
+                                            "hardwareclass":            {"default": "IP_ACE"},
+                                            "environment_variables":    {"default": {}},
+                                            "manifest_type":            {"default": "pytest"}                               
+                                        }
+                            
+                        }                    
+
+}

@@ -5,12 +5,14 @@ from Utils.HardeningCmdSetup import HardeningCmdSetup
 from Utils.HardeningOutputFolderConstructor import HardeningOutputFolderConstructor
 from Utils.RegressionCommandExecution import RegressionCommandExecution
 from Utils.TestcaseArragement import TestcaseArragement
+from Utils.ConfigFileGenerator import ConfigFileGenerator
 
 import argparse
 from datetime import datetime
 import os
 import shutil
 import sys
+import pandas as pd
 
 
 def fetchdaytime():
@@ -59,7 +61,7 @@ def format_status_line(label, status):
     padding = max(40 - len(f"{label} [{status}]: "), 0)
     return f"{label}{' ' * padding}[{status}]"
 
-def regression_function(testcase_execute_list, validation_framework, platform=None):
+def regression_function(testcase_execute_list, validation_framework, config_testcycle, config_fpga_image, config_system_provisioning, config_maestro, config_maestro_branch, platform=None):
     summary_result = []
     
     for feature_testcase in testcase_execute_list:
@@ -89,16 +91,20 @@ def regression_function(testcase_execute_list, validation_framework, platform=No
         #### CONFIG FILE
         #Copy the default config file to output folder
         if validation_framework == "perspec_maestro":
+            
             config_file = config_perspec_maestro_file 
             config_output_file = os.path.join(temporary_output_folder_path, config_perspec_maestro_file)
+            
         elif validation_framework == "pytest":
             config_file = config_pytest_file
             config_output_file = os.path.join(temporary_output_folder_path, config_pytest_file)
-        shutil.copy(os.path.join(home_dir, 'Hardening_Testlist_Directory', config_file) , config_output_file)
+        function_config_file = ConfigFileGenerator()
+        function_config_file.main(validation_framework, config_output_file, config_testcycle[0], config_fpga_image[0], config_system_provisioning[0], config_maestro[0], config_maestro_branch[0])
+        #shutil.copy(os.path.join(home_dir, 'Hardening_Testlist_Directory', config_file) , config_output_file)
 
-        #Construct Command
+        # #Construct Command
         hardening_cmd = function_hardening_cmd.main(len(simpliflied_testcase_execute_list), testlist_output_file, config_output_file, platform)
-        returncode = 0
+
         # # Run Command
         function_regression_trigger = RegressionCommandExecution()
         stdout, stderr, returncode = function_regression_trigger.main(hardening_cmd, output_regression_log_file)
@@ -113,6 +119,7 @@ def regression_function(testcase_execute_list, validation_framework, platform=No
 
         content_width = 70
         if returncode == 0:
+            regression_runid_record(hardening_runid)
             print(f"+{'#' * content_width}+")
             print(f"{' ' * 33}PASS{' ' * 33}")
             print(f"+{'#' * content_width}+")
@@ -199,6 +206,12 @@ def parse_filter_arg(filter_args, parser):
     filters["pytest"]["testcase"] = testcase_list_pytest
     return filters
 
+def regression_runid_record(runid):
+    home_dir = os.getcwd()
+    csv_file = os.path.join(os.path.dirname(home_dir),'Regression_Result','Running_Regression_RUNID.csv')
+    new_row = pd.DataFrame({'runid': [runid]})
+    new_row.to_csv(csv_file, mode='a', header=False, index=False)
+
 
 if __name__ == "__main__":
 
@@ -212,9 +225,14 @@ if __name__ == "__main__":
     home_dir = os.getcwd()
 
     #Input file 
-    testlist_excel = os.path.join(home_dir, 'ace_testlist_ttlhg4_v1.xlsx')
+    testlist_excel = os.path.join(home_dir, 'ace_testlist_ttlhg4_v1_1.xlsx')
     config_perspec_maestro_file = "ace_config_qual_ttlhg4.py"
     config_pytest_file = "ace_pytest_qual_config_ttlhg4.py"
+
+    testcycle = "uv2VVD"
+    fpga_image = "drop3build0v62021"
+    #system_provisioning = "sonora_fec"
+    system_provisioning = "default"
 
     #Argument Parsing section
     parser = argparse.ArgumentParser(description="Automation Hardening Regression Script")
@@ -224,12 +242,58 @@ if __name__ == "__main__":
                         nargs='+',
                         help='Filter (required if trigger is "argument"): "val=..." and ("tag=..." and/or "config_location=...")'
                         )
+    parser.add_argument(
+                        '-tc', '--testcycle',
+                        nargs='+',
+                        help='Testcycle (required if trigger is "argument"): "-tc <<testcycle>> (uv2VVD, uv2IPC, fvVVD, fvIPC)"'
+                        )
+    parser.add_argument(
+                        '-fi', '--fpga_image',
+                        nargs='+',
+                        help='FPGA image (required if trigger is "argument"): "-fi <<fpga image>> (Can refer to libs/config_file.json for more info)"'
+                        )
+    parser.add_argument(
+                        '-sp', '--system_provisioning',
+                        nargs='+',
+                        help='System Provisioning (can be ignored if no extra system provisioning to set): "-sp <<system provisioning>> (Can refer to libs/config_file.json for more info)"'
+                        )
+    parser.add_argument(
+                        '--maestro',
+                        nargs='+',
+                        help='System Provisioning (only be used for perspec maestro for choosing maestro side branch or maestro repo): "--maestro <<maestro side branch or maestro repo>> (Can refer to libs/config_file.json for more info)"'
+                        )
+    parser.add_argument(
+                        '--maestro_branch',
+                        nargs='+',
+                        help='System Provisioning (only be used for perspec maestro branch or repo name): "--maestro_branch <<maestro branch>> (Can refer to libs/config_file.json for more info)"'
+                        )
     args = parser.parse_args()
     
     ## Main Flow ##
 
     #Inputs processing
     #Argument Parsing Input
+    if args.testcycle:
+        config_testcycle = args.testcycle
+    else:
+        parser.error(f'--tc val is not a given, testcycle needed (uv2VVD, uv2IPC, fvVVD, fvIPC)')
+    if args.fpga_image:
+        config_fpga_image = args.fpga_image
+    else:
+        config_fpga_image = ["default"]
+    if args.system_provisioning:
+        config_system_provisioning = args.system_provisioning
+    else:
+        config_system_provisioning = ["default"]
+    if args.maestro:
+        config_maestro = args.maestro
+    else:
+        config_maestro = ["maestro_github_remote_side_branch"]
+    if args.maestro_branch:
+        config_maestro_branch = args.maestro_branch
+
+    else:
+        config_maestro_branch = ["default"]
     if args.filter:
         print(f"{format_status_line('Main', 'info')}: Accepted argument parsing inputs")
         argument_filtered_testcase = parse_filter_arg(args.filter, parser)
@@ -267,7 +331,7 @@ if __name__ == "__main__":
                 
                 advanced_testcase_execute_list[validation_framework][0] = VolumeHardeningOutputFolderConstructor(advanced_testcase_execute_list[validation_framework][0], home_dir)
             
-            summary_result = regression_function(advanced_testcase_execute_list[validation_framework][0], validation_framework)
+            summary_result = regression_function(advanced_testcase_execute_list[validation_framework][0], validation_framework, config_testcycle, config_fpga_image, config_system_provisioning, config_maestro, config_maestro_branch)
             for summary_data in summary_result: summarize_list.append(summary_data)
             
 
@@ -283,7 +347,7 @@ if __name__ == "__main__":
                     #Testcase
                     advanced_testcase_execute_list[validation_framework][0][platform][validation_framework_sp] = VolumeHardeningOutputFolderConstructor(advanced_testcase_execute_list[validation_framework][0][platform][validation_framework_sp], home_dir, validation_framework_sp, platform)
 
-                    summary_result = regression_function(advanced_testcase_execute_list[validation_framework][0][platform][validation_framework_sp], validation_framework_sp, platform)
+                    summary_result = regression_function(advanced_testcase_execute_list[validation_framework][0][platform][validation_framework_sp], validation_framework_sp, config_testcycle, config_fpga_image, config_system_provisioning, config_maestro, config_maestro_branch, platform=platform)
                     for summary_data in summary_result: summarize_list.append(summary_data)
             
 
